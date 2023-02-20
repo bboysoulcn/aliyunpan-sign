@@ -64,9 +64,9 @@ if __name__ == '__main__':
     ding_secret = env.str('DING_SECRET')
     dingding_base_url = env.str('DINGDING_BASE_URL')
     refresh_token_list = env.list('REFRESH_TOKEN_LIST')
-    time = env.str('TIME')
+    schedule_time = env.str('TIME')
     for refresh_token in refresh_token_list:
-        schedule.every().day.at(time).do(sign, refresh_token)
+        schedule.every().day.at(schedule_time).do(sign, refresh_token)
     print("应用启动成功")
     while True:
         schedule.run_pending()
