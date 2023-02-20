@@ -7,6 +7,8 @@ import hashlib
 import base64
 import urllib.parse
 from environs import Env
+from loguru import logger
+
 
 
 def send_msg(msg):
@@ -67,7 +69,7 @@ if __name__ == '__main__':
     schedule_time = env.str('TIME')
     for refresh_token in refresh_token_list:
         schedule.every().day.at(schedule_time).do(sign, refresh_token)
-    print("应用启动成功")
+    logger.info("应用启动成功")
     while True:
         schedule.run_pending()
         time.sleep(1)
