@@ -13,8 +13,8 @@
 
 编辑env文件
 
-- DING_SECRET: 钉钉的secret
-- DINGDING_BASE_URL: 钉钉baseurl
+- DING_SECRET: 钉钉机器人的secret
+- DINGDING_BASE_URL: 钉钉机器人baseurl
 - REFRESH_TOKEN_LIST: 多个refresh token的话REFRESH_TOKEN_LIST以逗号分开，比如`REFRESH_TOKEN_LIST="token1,token2"`
 - TIME: 脚本运行的时间
 
