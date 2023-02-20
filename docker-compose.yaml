@@ -1,0 +1,10 @@
+version: 3
+services:
+  aliyun-sign:
+    build: .
+    container_name: "aliyun-sign"
+    restart: "always"
+    env_file:
+      - ./env
+    volumes:
+      - "/etc/localtime:/etc/localtime"
