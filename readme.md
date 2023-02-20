@@ -3,6 +3,7 @@
 ### todo
 
 - 是不是需要告警
+- telegram 告警
 
 ### 获取 refresh_token
 
@@ -17,6 +18,9 @@
 - DINGDING_BASE_URL: 钉钉机器人baseurl
 - REFRESH_TOKEN_LIST: 多个refresh token的话REFRESH_TOKEN_LIST以逗号分开，比如`REFRESH_TOKEN_LIST="token1,token2"`
 - TIME: 脚本运行的时间
+- BOT_TOKEN: telegram机器人的token
+- CHAT_ID: telegram的会话id
+- MSG_CHANNEL: 发送消息的通道，目前只支持[dingding,telegram]
 
 ### 启动
 
