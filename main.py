@@ -74,6 +74,7 @@ def aliyundrive_sign(token):
             send_msg("阿里云盘签到失败")
     else:
         logger.error('token 已失效请更新环境变量重新启动容器')
+        send_msg("token 已失效请更新环境变量重新启动容器")
 
 
 def msg_channel_handle(msg_channel):
