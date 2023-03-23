@@ -57,19 +57,23 @@ def aliyundrive_sign(token):
         'refresh_token': token
     })
     req = requests.Session()
-    resp = req.post(update_token_url, data=data, headers=headers).text
-    access_token = json.loads(resp)['access_token']
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + access_token
-    }
-    resp = req.post(signin_url, data=data, headers=headers)
-    result = json.loads(resp.text)['success']
+    resp = json.loads(req.post(update_token_url, data=data, headers=headers).text)
+    if "access_token" in resp:
+        access_token = resp['access_token']
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + access_token
+        }
+        resp = req.post(signin_url, data=data, headers=headers)
+        result = json.loads(resp.text)['success']
 
-    if result:
-        send_msg("阿里云盘签到成功")
+        if result:
+            send_msg("阿里云盘签到成功")
+            logger.info("阿里云盘签到成功")
+        else:
+            send_msg("阿里云盘签到失败")
     else:
-        send_msg("阿里云盘签到失败")
+        logger.error('token 已失效请更新环境变量重新启动容器')
 
 
 def msg_channel_handle(msg_channel):
@@ -93,8 +97,8 @@ if __name__ == '__main__':
     msg_channel = env.str('MSG_CHANNEL')
     send_msg = msg_channel_handle(msg_channel)
     for refresh_token in refresh_token_list:
-        # schedule.every().day.at(schedule_time).do(aliyundrive_sign, refresh_token)
-        schedule.every(3).seconds.do(aliyundrive_sign, refresh_token)
+        schedule.every().day.at(schedule_time).do(aliyundrive_sign, refresh_token)
+        # schedule.every(3).seconds.do(aliyundrive_sign, refresh_token)
     logger.info("应用启动成功")
     while True:
         schedule.run_pending()
